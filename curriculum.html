@@ -458,6 +458,80 @@
             .timeline-step { display: flex; text-align: left; gap: 1.5rem; padding: 0; }
             .step-circle { margin: 0; }
         }
+        /* =========================================
+           手机端自适应代码 (Mobile Responsiveness)
+           请将此段代码放在 <style> 的最后面
+           ========================================= */
+        @media (max-width: 768px) {
+            
+            /* 1. 导航栏调整：Logo在上，菜单在下垂直排列 */
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+                position: relative; /* 手机端取消固定定位，防止遮挡内容 */
+            }
+            .nav-links {
+                display: flex !important; /* 强制显示菜单 */
+                flex-direction: column;   /* 垂直排列 */
+                gap: 15px;
+                width: 100%;
+                text-align: center;
+                margin-top: 20px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .lang-switch { margin-left: 0; margin-top: 15px; display: inline-block; }
+            .logo-divider { display: none; } /* 手机上隐藏那条竖线 */
+
+            /* 2. Hero 区域（大标题）调整 */
+            .hero-section {
+                padding: 60px 5% 60px; /* 减小内边距 */
+            }
+            .hero-title {
+                font-size: 2.2rem !important; /* 字体变小 */
+                line-height: 1.2;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            /* 3. 通用布局：强制所有“左右两栏”变为“单栏” */
+            .feature-grid, 
+            .steps-grid, 
+            .req-container, 
+            .form-grid, 
+            .fees-grid,
+            .intro-block {
+                grid-template-columns: 1fr !important; /* 强制变成1列 */
+                gap: 30px;
+                display: grid !important;
+                width: 100% !important;
+            }
+
+            /* 4. 特殊修复：图片与文字的顺序 */
+            .feature-grid.reverse { 
+                direction: ltr !important; /* 手机上取消左右互换，统一为图在上文在下 */ 
+            }
+            .feature-text { padding: 0; } /* 取消手机上的额外内边距 */
+
+            /* 5. 轮播图高度适应 */
+            .carousel-container, .carousel-slide {
+                height: 300px !important; /* 手机上不需要太高 */
+            }
+            .carousel-caption {
+                padding: 20px;
+            }
+            .carousel-caption h3 { font-size: 1.2rem; }
+            .carousel-caption p { font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+            /* 6. 表格与输入框 */
+            .full-width { grid-column: span 1; } /* 表单全宽归位 */
+            
+            /* 7. 字体与间距微调 */
+            .section-title { font-size: 1.8rem; margin-bottom: 30px; }
+            .container, .content-block { padding: 40px 5%; }
+        }
     </style>
 </head>
 <body>
