@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李忠俊 副教授 | SWUFE AI for Business</title>
+    <style>
+        :root { --swufe-blue: #004ea2; --swufe-dark-blue: #002a5c; --swufe-gold: #FFB81C; --text-dark: #222222; --text-grey: #555555; --bg-light: #f9fafb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); overflow-x: hidden; }
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .logo-box img { width: auto; height: 92%; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: #fff; font-weight: 800; font-size: 1.5rem; line-height: 1; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        .lang-switch { color: #ffffff !important; border: 1px solid rgba(255,255,255, 0.8); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; margin-left: 1rem; }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); border-color: #ffffff; }
+        .profile-container { max-width: 1200px; margin: 120px auto 60px; padding: 0 5%; display: grid; grid-template-columns: 300px 1fr; gap: 4rem; }
+        .profile-sidebar { position: sticky; top: 100px; height: fit-content; }
+        .profile-photo { width: 100%; height: 380px; background-color: #eee; border-radius: 8px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+        .contact-info h3 { font-size: 1.1rem; color: var(--swufe-blue); margin-bottom: 1rem; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px; display: inline-block; }
+        .contact-item { margin-bottom: 0.8rem; font-size: 0.95rem; color: #555; display: flex; align-items: center; gap: 10px; }
+        .contact-icon { font-size: 1.1rem; color: var(--swufe-blue); width: 20px; text-align: center; }
+        .profile-content { background: #fff; padding: 2rem 0; }
+        .prof-header { margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+        .prof-name-large { font-size: 2.5rem; font-weight: 800; color: var(--swufe-dark-blue); margin-bottom: 0.5rem; }
+        .prof-title-large { font-size: 1.2rem; color: #666; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+        .content-section { margin-bottom: 3rem; }
+        .section-heading { font-size: 1.5rem; color: var(--swufe-blue); margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; }
+        .section-heading::before { content: ''; display: block; width: 6px; height: 24px; background: var(--swufe-gold); margin-right: 12px; border-radius: 2px; }
+        .research-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+        .tag-large { background: #f0f7ff; color: var(--swufe-blue); padding: 6px 15px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border: 1px solid #d0e4ff; }
+        .publication-list { list-style: none; padding-left: 0; }
+        .publication-list li { margin-bottom: 1.2rem; padding-left: 20px; position: relative; color: #444; font-size: 0.95rem; }
+        .publication-list li::before { content: '•'; color: var(--swufe-gold); font-weight: bold; position: absolute; left: 0; }
+        .edu-list { list-style: none; padding: 0; }
+        .edu-list li { margin-bottom: 1rem; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .edu-degree { font-weight: 700; color: var(--text-dark); display: block; }
+        .edu-school { color: #666; font-size: 0.9rem; }
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; margin-top: 4rem; }
+        @media (max-width: 900px) { .profile-container { grid-template-columns: 1fr; gap: 2rem; } .profile-sidebar { position: static; max-width: 400px; margin: 0 auto; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index-cn.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+        <div class="nav-links">
+            <a href="index-cn.html">首页</a>
+            <a href="curriculum-cn.html">课程设置</a>
+            <a href="faculty-cn.html" class="active">师资力量</a>
+            <a href="#">学生体验</a>
+            <a href="#">招生信息</a>
+        </div>
+        <a href="Zhongjun Li.html" class="lang-switch">EN</a>
+    </nav>
+
+    <div class="profile-container">
+        
+        <aside class="profile-sidebar">
+            <div class="profile-photo">
+                <img src="images/lizhongjun.jpg" alt="李忠俊副教授" onerror="this.src='https://via.placeholder.com/400x500?text=Prof.+Li'">
+            </div>
+            
+            <div class="contact-info">
+                <h3>联系方式</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:lizj_t@swufe.edu.cn" style="color:#555; text-decoration:none;">lizj_t@swufe.edu.cn</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>电子商务系主任</span>
+                </div>
+            </div>
+
+            <div class="contact-info" style="margin-top: 2rem;">
+                <h3>教育背景</h3>
+                <ul class="edu-list">
+                    <li>
+                        <span class="edu-degree">技术经济及管理 博士</span>
+                        <span class="edu-school">西南财经大学 (2013)</span>
+                    </li>
+                    <li>
+                        <span class="edu-degree">产业经济学 硕士</span>
+                        <span class="edu-school">西安交通大学 (2004)</span>
+                    </li>
+                    <li>
+                        <span class="edu-degree">流通信息管理 学士</span>
+                        <span class="edu-school">陕西财经学院 (1998)</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="profile-content">
+            
+            <div class="prof-header">
+                <h1 class="prof-name-large">李忠俊</h1>
+                <div class="prof-title-large">副教授、硕士生导师</div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">个人简介</div>
+                <p>
+                    李忠俊，博士，副教授，现任西南财经大学管理科学与工程学院电子商务系主任。
+                </p>
+                <p>
+                    担任四川省商务厅、成都市经信局等多个政府部门专家库成员，四川省高等教育学会数字经济专业委员会秘书长。牵头完成了《四川省“十三五”电子商务发展规划》《成都市电子商务发展“十三五”规划》等重要政府规划项目。常年担任全国大学生电子商务“创新、创意及创业”挑战赛评委。主编《金融科技》、《互联网金融概论》等多部教材。主要研究领域为电子商务、数字经济（含数字乡村）、互联网金融等。
+                </p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">研究领域</div>
+                <div class="research-tags">
+                    <span class="tag-large">金融科技</span>
+                    <span class="tag-large">数字经济</span>
+                    <span class="tag-large">电子商务</span>
+                    <span class="tag-large">网络营销</span>
+                    <span class="tag-large">电子支付</span>
+                    <span class="tag-large">互联网创新创业</span>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">代表性著作与项目</div>
+                <ul class="publication-list">
+                    <li>
+                        <strong>著作：</strong> 《金融科技》，副主编，高等教育出版社，2020年。
+                    </li>
+                    <li>
+                        <strong>著作：</strong> 《互联网金融概论》，副主编，高等教育出版社，2019年。
+                    </li>
+                    <li>
+                        <strong>著作：</strong> 《电子支付与结算》，副主编，东北财经大学出版社，2017年。
+                    </li>
+                    <li>
+                        <strong>政府项目：</strong> 《四川省“十三五”电子商务发展规划》，四川省商务厅，2016年。
+                    </li>
+                    <li>
+                        <strong>行业报告：</strong> 《四川省支付行业发展研究报告》，四川省支付清算协会（2022-2024版）。
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">教学与奖励</div>
+                <p><strong>荣誉奖励：</strong></p>
+                <ul style="padding-left: 20px; color:#555; margin-bottom: 1.5rem;">
+                    <li>指导学生团队荣获第十四届全国大学生电子商务“三创赛”全国总决赛一等奖 (2024)。</li>
+                    <li>西南财经大学优秀教学成果一等奖 (2010)。</li>
+                    <li>多次获得全国及四川省“三创赛”优秀指导老师称号。</li>
+                </ul>
+                <p><strong>主讲课程：</strong></p>
+                <ul style="padding-left: 20px; color:#555;">
+                    <li><strong>慕课：</strong> 互联网金融、数字经济支付</li>
+                    <li><strong>本科：</strong> 互联网金融、电子商务、网络营销、电子支付、互联网创新创业</li>
+                    <li><strong>研究生：</strong> 互联网模式与创新、工程经济学、智能支付与管理</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 西南财经大学. 版权所有.</p>
+    </footer>
+
+</body>
+</html>

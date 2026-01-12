@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>师资队伍 | SWUFE AI for Business</title>
+    <style>
+        :root { --swufe-blue: #004ea2; --swufe-dark-blue: #002a5c; --swufe-gold: #FFB81C; --text-dark: #222222; --text-grey: #555555; --bg-light: #f9fafb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); overflow-x: hidden; }
+
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .logo-box img { width: auto; height: 92%; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: #fff; font-weight: 800; font-size: 1.5rem; line-height: 1; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        .nav-links a.active { color: var(--swufe-gold); font-weight: 700; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px;} 
+        .lang-switch { color: #ffffff !important; border: 1px solid rgba(255,255,255, 0.8); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; margin-left: 1rem; }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); border-color: #ffffff; }
+
+        .page-header { background-color: var(--swufe-dark-blue); color: white; padding: 120px 5% 60px; text-align: center; }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+        .page-header p { font-size: 1.1rem; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+
+        .faculty-section { max-width: 1300px; margin: 60px auto; padding: 0 4%; }
+        
+        /* 分类标题样式 */
+        .section-title { 
+            font-size: 1.8rem; 
+            color: var(--swufe-blue); 
+            margin-bottom: 40px; 
+            border-bottom: 2px solid #eee; 
+            padding-bottom: 15px; 
+            font-weight: 700; 
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--swufe-gold);
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+        }
+
+        /* 强制4列布局 */
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 30px; 
+            margin-bottom: 80px;
+        }
+
+        .faculty-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column; border: 1px solid #eee; }
+        .faculty-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--swufe-blue); }
+        .card-img-box { width: 100%; height: 380px; background-color: #e0e0e0; overflow: hidden; position: relative; }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.5s ease; }
+        .faculty-card:hover .card-img-box img { transform: scale(1.05); }
+        .card-info { padding: 25px 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-name { font-size: 1.3rem; font-weight: 700; color: var(--swufe-dark-blue); margin-bottom: 8px; }
+        .card-title { font-size: 0.95rem; color: var(--text-grey); font-weight: 500; margin-bottom: 15px; line-height: 1.3; }
+        .card-arrow { color: var(--swufe-gold); font-weight: bold; font-size: 0.85rem; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
+        .faculty-card:hover .card-arrow { opacity: 1; transform: translateY(0); }
+
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; margin-top: 60px; }
+
+        @media (max-width: 1200px) { .faculty-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 900px) { .faculty-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { display: none; } }
+        @media (max-width: 500px) { .faculty-grid { grid-template-columns: 1fr; } .page-header h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index-cn.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+      <div class="nav-links">
+            <a href="index-cn.html">首页</a>
+            <a href="curriculum-cn.html">课程设置</a>
+            <a href="faculty-cn.html">师资力量</a>
+            <a href="student experience-cn.html">学生体验</a>
+            <a href="admissions-cn.html">招生信息</a>
+        </div>
+        <a href="faculty.html" class="lang-switch">EN</a>
+    </nav>
+
+    <header class="page-header">
+        <h1>师资队伍</h1>
+        <p>汇聚知名教授与专业团队，共同推动 AI for Business 项目发展</p>
+    </header>
+
+    <div class="faculty-section">
+        <div class="section-title">专任教师</div>
+        <div class="faculty-grid">
+            
+            <a href="Qinghong Shuai-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/shuaiqinghong.jpg" alt="帅青红" onerror="this.src='https://via.placeholder.com/300x400?text=帅青红'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">帅青红</div>
+                        <div class="card-title">教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Chuan Luo-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/luochuan.jpg" alt="罗川" onerror="this.src='https://via.placeholder.com/300x400?text=罗川'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">罗川</div>
+                        <div class="card-title">教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Jing Wu-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/wujing.jpg" alt="伍晶" onerror="this.src='https://via.placeholder.com/300x400?text=伍晶'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">伍晶</div>
+                        <div class="card-title">教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Ling Liu-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/liuling.jpg" alt="刘凌" onerror="this.src='https://via.placeholder.com/300x400?text=刘凌'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">刘凌</div>
+                        <div class="card-title">教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Zhongjun Li-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/lizhongjun.jpg" alt="李忠俊" onerror="this.src='https://via.placeholder.com/300x400?text=李忠俊'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">李忠俊</div>
+                        <div class="card-title">副教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Jinkun Li-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/lijinkun.jpg" alt="李瑾坤" onerror="this.src='https://via.placeholder.com/300x400?text=李瑾坤'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">李瑾坤</div>
+                        <div class="card-title">副教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Yigang Zhang-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/zhangyigang.jpg" alt="张义刚" onerror="this.src='https://via.placeholder.com/300x400?text=张义刚'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">张义刚</div>
+                        <div class="card-title">副教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Yun Zhang-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/zhangyun.jpg" alt="张赟" onerror="this.src='https://via.placeholder.com/300x400?text=张赟'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">张赟</div>
+                        <div class="card-title">副教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Dan Ding-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/dingdan.jpg" alt="丁丹" onerror="this.src='https://via.placeholder.com/300x400?text=丁丹'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">丁丹</div>
+                        <div class="card-title">副教授</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Qian Liang-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/liangqian.jpg" alt="梁倩" onerror="this.src='https://via.placeholder.com/300x400?text=梁倩'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">梁倩</div>
+                        <div class="card-title">讲师</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Xi Yang-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/yangxi.jpg" alt="杨茜" onerror="this.src='https://via.placeholder.com/300x400?text=杨茜'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">杨茜</div>
+                        <div class="card-title">讲师</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="faculty-section">
+        <div class="section-title">行政团队</div>
+        <div class="faculty-grid">
+            
+            <a href="Jiani Guo-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/guojiani.jpg" alt="郭佳妮" onerror="this.src='https://via.placeholder.com/300x400?text=郭佳妮'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">郭佳妮</div>
+                        <div class="card-title">学院外事秘书</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+            <a href="Chao Lai-cn.html" class="faculty-card">
+                <div class="card-img-box"><img src="images/laichao.jpg" alt="赖超" onerror="this.src='https://via.placeholder.com/300x400?text=赖超'"></div>
+                <div class="card-info">
+                    <div>
+                        <div class="card-name">赖超</div>
+                        <div class="card-title">学院本科教学秘书</div>
+                    </div>
+                    <div class="card-arrow">查看详情 →</div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 西南财经大学. 版权所有.</p>
+    </footer>
+
+</body>
+</html>

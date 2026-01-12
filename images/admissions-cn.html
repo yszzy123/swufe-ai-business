@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>招生信息 | SWUFE AI for Business</title>
+    <style>
+        /* 复用样式 (保持一致) */
+        :root { --swufe-blue: #004ea2; --swufe-dark-blue: #002a5c; --swufe-gold: #FFB81C; --text-dark: #222222; --text-light: #f4f4f4; --bg-light: #f9fafb; --card-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { line-height: 1.6; color: var(--text-dark); background-color: var(--bg-light); overflow-x: hidden; }
+
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .logo-box img { width: auto; height: 92%; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: #fff; font-weight: 800; font-size: 1.5rem; line-height: 1; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        .nav-links a.active { color: var(--swufe-gold); font-weight: 700; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px;} 
+        .lang-switch { color: #ffffff !important; border: 1px solid rgba(255,255,255, 0.8); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; margin-left: 1rem; }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); border-color: #ffffff; }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--swufe-dark-blue) 0%, #001f3f 100%);
+            color: white;
+            padding: 180px 5% 100px;
+            text-align: center;
+            position: relative;
+        }
+        .hero-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; }
+        .hero-subtitle { font-size: 1.3rem; max-width: 700px; margin: 0 auto 40px; opacity: 0.9; font-weight: 300; }
+        .cta-button { display: inline-block; background-color: var(--swufe-gold); color: var(--swufe-dark-blue); padding: 15px 40px; font-weight: 700; font-size: 1.1rem; text-decoration: none; border-radius: 50px; transition: transform 0.3s, box-shadow 0.3s; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 184, 28, 0.3); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 5%; }
+        .section-title { font-size: 2.2rem; color: var(--swufe-dark-blue); text-align: center; margin-bottom: 50px; font-weight: 700; }
+        
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 100px; }
+        .step-card { background: white; padding: 40px 30px; border-radius: 12px; box-shadow: var(--card-shadow); text-align: center; position: relative; transition: transform 0.3s; border-top: 5px solid var(--swufe-blue); }
+        .step-card:hover { transform: translateY(-5px); }
+        .step-number { background: var(--swufe-blue); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; margin: 0 auto 20px; }
+        .step-title { font-size: 1.3rem; margin-bottom: 15px; color: var(--swufe-dark-blue); font-weight: 700; }
+        .step-desc { color: #666; font-size: 0.95rem; }
+
+        .req-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 100px; align-items: start; }
+        .req-box h3 { font-size: 1.5rem; color: var(--swufe-blue); margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .check-list { list-style: none; }
+        .check-list li { margin-bottom: 15px; position: relative; padding-left: 30px; color: #444; }
+        .check-list li::before { content: '✓'; color: var(--swufe-gold); font-weight: bold; position: absolute; left: 0; font-size: 1.1rem; }
+        
+        .deadline-card { background: var(--swufe-dark-blue); color: white; padding: 30px; border-radius: 10px; margin-top: 30px; }
+        .deadline-item { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 0; }
+        .deadline-item:last-child { border-bottom: none; }
+        .deadline-date { color: var(--swufe-gold); font-weight: 700; }
+
+        .fees-section { background-color: #f0f4f8; padding: 80px 5%; border-radius: 20px; margin-bottom: 100px; }
+        .fees-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .fee-item h4 { font-size: 1.2rem; color: var(--swufe-dark-blue); margin-bottom: 10px; }
+        .fee-price { font-size: 2rem; color: var(--swufe-blue); font-weight: 800; margin-bottom: 10px; }
+        .scholarship-box { background: white; padding: 25px; border-radius: 8px; border-left: 4px solid var(--swufe-gold); }
+
+        .faq-item { background: white; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--swufe-dark-blue); transition: background 0.3s; }
+        .faq-question:hover { background-color: #f9f9f9; }
+        .faq-question::after { content: '+'; font-size: 1.5rem; color: var(--swufe-gold); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding: 0 20px; color: #555; background: #fff; }
+        .faq-item.active .faq-answer { max-height: 200px; padding: 20px; border-top: 1px solid #eee; }
+        .faq-item.active .faq-question::after { content: '-'; }
+
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; margin-top: 0; }
+        @media (max-width: 768px) { .req-container { grid-template-columns: 1fr; } .hero-title { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index-cn.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+        <div class="nav-links">
+            <a href="index-cn.html">首页</a>
+            <a href="curriculum-cn.html">课程设置</a>
+            <a href="faculty-cn.html">师资力量</a>
+            <a href="student-experience-cn.html">学生体验</a>
+            <a href="admissions-cn.html" class="active">招生信息</a>
+        </div>
+        <a href="admissions.html" class="lang-switch">EN</a>
+    </nav>
+
+    <section class="hero-section">
+        <h1 class="hero-title">开启你的 AI 商业之旅</h1>
+        <p class="hero-subtitle">我们正在寻找准备好利用人工智能重塑商业未来的创新者。加入我们，共创无限可能。</p>
+        <a href="https://admission.swufe.edu.cn" target="_blank" class="cta-button">立即申请</a>
+    </section>
+
+    <div class="container">
+        
+        <h2 class="section-title">如何申请</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">在线申请</h3>
+                <p class="step-desc">通过西南财经大学国际学生服务系统完成在线申请表并缴纳报名费。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">材料审核</h3>
+                <p class="step-desc">招生委员会将审核你的成绩单、语言能力证明及个人陈述等申请材料。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">综合面试</h3>
+                <p class="step-desc">初审通过者将受邀参加在线或线下面试，以评估专业匹配度与综合素质。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">录取通知</h3>
+                <p class="step-desc">成功申请者将收到正式录取通知书及签证申请表（JW202表）。</p>
+            </div>
+        </div>
+
+        <div class="req-container">
+            <div class="req-box">
+                <h3>申请资格与要求</h3>
+                <ul class="check-list">
+                    <li><strong>学历背景：</strong> 申请本科需具备高中学历；申请硕士需具备本科学历。</li>
+                    <li><strong>语言能力（全英项目）：</strong> 雅思 6.5 / 托福 90 或同等水平。</li>
+                    <li><strong>学科基础：</strong> 具备良好的数学基础或量化分析能力者优先。</li>
+                    <li><strong>所需文件：</strong> 成绩单、个人陈述、推荐信（2封）、护照复印件。</li>
+                </ul>
+            </div>
+
+            <div class="req-box">
+                <h3>2025年入学关键节点</h3>
+                <div class="deadline-card">
+                    <div class="deadline-item">
+                        <span>开放申请</span>
+                        <span class="deadline-date">2024年 10月 15日</span>
+                    </div>
+                    <div class="deadline-item">
+                        <span>早申截止 (Early Action)</span>
+                        <span class="deadline-date">2024年 12月 31日</span>
+                    </div>
+                    <div class="deadline-item">
+                        <span>常规申请截止</span>
+                        <span class="deadline-date">2025年 4月 30日</span>
+                    </div>
+                    <div class="deadline-item">
+                        <span>开学时间</span>
+                        <span class="deadline-date">2025年 9月</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fees-section">
+            <h2 class="section-title" style="margin-bottom: 40px;">学费与奖学金</h2>
+            <div class="fees-grid">
+                <div class="fee-item">
+                    <h4>年度学费</h4>
+                    <div class="fee-price">CNY 20,000</div>
+                    <p style="color:#666;">每学年（具体以当年招生简章为准）。</p>
+                </div>
+                <div class="fee-item">
+                    <h4>可用奖学金</h4>
+                    <div class="scholarship-box">
+                        <p><strong>中国政府奖学金 (CSC):</strong> 全额资助（含学费+生活费）。</p>
+                        <p style="margin-top:10px;"><strong>成都市“一带一路”奖学金:</strong> 提供部分或全额学费减免。</p>
+                        <p style="margin-top:10px;"><strong>西财校长奖学金:</strong> 择优资助优秀申请者。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">常见问题 (FAQ)</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">申请前需要会编程吗？</div>
+                <div class="faq-answer">不需要。我们的课程包含 Python 等编程基础课，但如果你对技术有强烈兴趣会更有优势。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">如果没有雅思/托福成绩可以申请吗？</div>
+                <div class="faq-answer">如果你之前的教育经历是全英文授课，可以申请免语言成绩。否则，需要提供有效的语言成绩证明。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">有申请费吗？</div>
+                <div class="faq-answer">是的，申请费为人民币 600 元，且不予退还。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">如何联系招生办？</div>
+                <div class="faq-answer">您可以发送邮件至 admission@swufe.edu.cn 或致电 +86-28-87355437。</div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 西南财经大学. 版权所有.</p>
+    </footer>
+
+    <script>
+        const faqs = document.querySelectorAll(".faq-item");
+        faqs.forEach(faq => {
+            faq.addEventListener("click", () => {
+                faq.classList.toggle("active");
+            });
+        });
+    </script>
+
+</body>
+</html>

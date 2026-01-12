@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>西南财经大学 | AI 商务</title>
+    <style>
+        /* CSS 样式保持完全一致 */
+        :root {
+            --swufe-blue: #004ea2;
+            --swufe-dark-blue: #002a5c;
+            --swufe-gold: #FFB81C;
+            --text-dark: #222222;
+            --text-grey: #555555;
+            --text-light: #ffffff;
+            --bg-light: #f9fafb;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; } /* 中文字体优化 */
+        body { line-height: 1.6; color: var(--text-dark); overflow-x: hidden; }
+
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); flex-shrink: 0; }
+        .logo-box img { width: auto; height: 92%; display: block; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: var(--text-light); font-weight: 800; font-size: 1.5rem; line-height: 1; letter-spacing: 0.5px; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+        
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95rem; position: relative; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        .nav-links a.active { color: var(--swufe-gold); font-weight: 700; }
+        .lang-switch { color: var(--text-light); border: 1px solid var(--text-light); padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-size: 0.85rem; cursor: pointer; }
+        .lang-switch:hover { background: rgba(255,255,255,0.1); }
+
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--text-light); padding: 0 1rem; background: linear-gradient(to bottom, rgba(0, 42, 92, 0.9), rgba(0, 78, 162, 0.75)), url('images/library-bg.jpg') no-repeat center center/cover; }
+        .hero-content { max-width: 900px; z-index: 2; margin-top: 80px; }
+        .hero-badge { display: inline-block; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 0.5rem 1.5rem; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+        .hero h1 { font-size: 3.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -1px; }
+        .hero p { font-size: 1.3rem; opacity: 0.95; margin-bottom: 2.5rem; font-weight: 300; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .btn { display: inline-block; padding: 1rem 2.5rem; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: all 0.2s; margin: 0 10px; }
+        .btn-primary { background-color: var(--swufe-gold); color: var(--swufe-blue); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 184, 28, 0.4); }
+        .btn-outline { background: transparent; border: 2px solid var(--text-light); color: var(--text-light); }
+        .btn-outline:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+
+        .section-padding { padding: 6rem 5%; }
+        .ranking-section { background-color: #fff; display: flex; align-items: center; gap: 5rem; flex-wrap: wrap; }
+        .ranking-text { flex: 1; min-width: 320px; }
+        .section-title { font-size: 2.5rem; color: var(--swufe-blue); margin-bottom: 1.5rem; position: relative; padding-bottom: 1rem; font-weight: 800; }
+        .section-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 60px; height: 5px; background-color: var(--swufe-gold); }
+        .ranking-text p { color: var(--text-grey); font-size: 1.15rem; margin-bottom: 1.5rem; line-height: 1.8; text-align: justify; }
+        .highlight-stat { color: var(--swufe-blue); font-weight: 700; background: rgba(0, 78, 162, 0.08); padding: 0 5px; border-radius: 4px; }
+        .ranking-images-wrapper { flex: 1.2; min-width: 350px; position: relative; background: #f0f4f8; padding: 20px; border-radius: 20px; }
+        .image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; align-items: start; }
+        .ranking-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: transform 0.3s ease; border: 1px solid rgba(0,0,0,0.05); }
+        .ranking-card:hover { transform: translateY(-5px); }
+        .ranking-card img { width: 100%; height: auto; display: block; }
+
+        .dept-section { background-color: var(--bg-light); display: flex; flex-direction: row-reverse; align-items: stretch; min-height: 600px; }
+        .dept-image { flex: 1; min-width: 400px; background: url('images/gate.jpg') no-repeat center center/cover; position: relative; }
+        .dept-image::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 42, 92, 0.2); }
+        .dept-content { flex: 1; padding: 5rem 6%; display: flex; flex-direction: column; justify-content: center; }
+        .dept-tag { font-size: 0.9rem; color: var(--swufe-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 1rem; }
+        .dept-text-block { font-size: 1.15rem; color: #444; line-height: 1.8; margin-bottom: 2rem; text-align: justify; }
+        .stats-row { display: flex; gap: 3rem; margin: 1rem 0 2rem 0; padding: 1.5rem 0; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; }
+        .stat-box h3 { font-size: 3rem; color: var(--swufe-blue); line-height: 1; font-weight: 800; margin-bottom: 0.5rem; }
+        .stat-box p { font-size: 0.85rem; color: #666; font-weight: 600; text-transform: uppercase; }
+        .feature-list { list-style: none; margin-top: 1rem; }
+        .feature-list li { position: relative; padding-left: 25px; margin-bottom: 1rem; color: var(--text-dark); font-size: 1.05rem; }
+        .feature-list li::before { content: '➜'; color: var(--swufe-gold); position: absolute; left: 0; font-weight: bold; }
+
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; }
+        
+        @media (max-width: 900px) { .hero h1 { font-size: 2.5rem; } .ranking-section, .dept-section { flex-direction: column; } .dept-image { min-height: 300px; width: 100%; } .ranking-images-wrapper { width: 100%; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index-cn.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+        
+      <div class="nav-links">
+            <a href="index-cn.html">首页</a>
+            <a href="curriculum-cn.html">课程设置</a>
+            <a href="faculty-cn.html">师资力量</a>
+            <a href="student-experience-cn.html">学生体验</a>
+            <a href="admissions-cn.html">招生信息</a>
+        </div>
+        
+        <a href="index.html" class="lang-switch">EN</a>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">2026年招生已开启</div>
+            <h1>驾驭智能体 AI<br>引领商业未来</h1>
+            <p>中国西部首屈一指的“AI 商务”本科创新实验班。</p>
+            <div>
+                <a href="curriculum-cn.html" class="btn btn-primary">探索课程体系</a>
+                <a href="#" class="btn btn-outline">查看招生简章</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="ranking-section section-padding">
+        <div class="ranking-text">
+            <h2 class="section-title">为什么选择西财?</h2>
+            <p>
+                <strong>顶尖的全球排名：</strong> 根据权威的 
+                <span class="highlight-stat">US News 世界大学排名</span>，
+                我们的经济与商科项目始终位列世界前沿。
+            </p>
+            <p>
+                我们的管理学科实力尤为雄厚，在学术卓越性、高影响力研究及行业相关性方面享誉全球。具体而言，我们的 
+                <span class="highlight-stat">经济与商业学科在2025年位列全球第17位</span>，
+                彰显了我们致力于提供世界级教育的承诺。加入我们，意味着师从领域内最顶尖的学者。
+            </p>
+        </div>
+        <div class="ranking-images-wrapper">
+            <div class="image-grid">
+                <div class="ranking-card"><img src="images/USNews.jpg" alt="US News Header"></div>
+                <div class="ranking-card"><img src="images/USNews17.jpg" alt="US News Ranking 17 Proof"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dept-section">
+        <div class="dept-image"></div>
+        
+        <div class="dept-content">
+            <div class="dept-tag">管理科学与工程学院</div>
+            <h2 class="section-title">电子商务系</h2>
+            
+            <p class="dept-text-block">
+                西南财经大学电子商务系成立于 2002 年，下设<strong>国家级一流本科专业（电子商务）</strong>。
+                在 2025 软科中国大学专业排名中被评为 <strong>A+ 级</strong>，<strong>全国排名第 7</strong>（共 278 所高校）。
+                在人工智能时代下，我们全面进行专业升级，提出面向未来的<strong>“AI 商务”专业方向</strong>。
+                本专业面向数字经济及 AI 商务新业态的发展需求，培养学生掌握领先技术与商业智慧，培养<span class="highlight-stat">“通 AI，精商务”</span>的复合交叉型人才。
+            </p>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <h3>A+</h3>
+                    <p>国家级评级</p>
+                </div>
+                <div class="stat-box">
+                    <h3>#7</h3>
+                    <p>全国排名</p>
+                </div>
+                <div class="stat-box">
+                    <h3>2002</h3>
+                    <p>建系年份</p>
+                </div>
+            </div>
+            
+            <ul class="feature-list">
+                <li>掌握领先的 Agentic AI (智能体) 技术。</li>
+                <li>培养新经济时代的深度商业智慧。</li>
+                <li>在 AI 驱动的商业场景中进行创新。</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 西南财经大学. 版权所有.</p>
+    </footer>
+
+</body>
+</html>

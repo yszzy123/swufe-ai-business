@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生体验 | SWUFE AI for Business</title>
+    <style>
+        /* === 核心变量 === */
+        :root { --swufe-blue: #004ea2; --swufe-dark-blue: #002a5c; --swufe-gold: #FFB81C; --text-dark: #222222; --text-light: #f4f4f4; --bg-light: #f9fafb; --card-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { line-height: 1.6; color: var(--text-dark); background-color: var(--bg-light); overflow-x: hidden; }
+
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .logo-box img { width: auto; height: 92%; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: #fff; font-weight: 800; font-size: 1.5rem; line-height: 1; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        .nav-links a.active { color: var(--swufe-gold); font-weight: 700; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px;} 
+        .lang-switch { color: #ffffff !important; border: 1px solid rgba(255,255,255, 0.8); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; margin-left: 1rem; }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); border-color: #ffffff; }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--swufe-dark-blue) 0%, #001f3f 100%);
+            color: white;
+            padding: 200px 5% 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 184, 28, 0.1) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-title { font-size: 3.8rem; font-weight: 800; margin-bottom: 25px; letter-spacing: -1px; background: -webkit-linear-gradient(0deg, #fff, #b3d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.4rem; max-width: 800px; margin: 0 auto 40px; color: rgba(255,255,255,0.95); font-weight: 300; } 
+
+        /* Carousel */
+        .carousel-container {
+            max-width: 1200px;
+            margin: -60px auto 80px; 
+            position: relative;
+            z-index: 10;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            background: #000;
+        }
+        .carousel-slide { 
+            display: none; 
+            width: 100%; 
+            height: 500px; 
+            position: relative;
+            animation: fadeEffect 1.5s ease-in-out; 
+        }
+        @keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-caption {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white; padding: 60px 40px 30px;
+        }
+        .carousel-caption h3 { font-size: 1.5rem; margin-bottom: 5px; color: var(--swufe-gold); }
+        .carousel-caption p { font-size: 1rem; opacity: 0.9; }
+        .prev, .next { cursor: pointer; position: absolute; top: 50%; margin-top: -22px; padding: 16px; color: white; font-weight: bold; font-size: 18px; transition: 0.6s ease; background-color: rgba(0,0,0,0.3); }
+        .next { right: 0; }
+        .prev:hover, .next:hover { background-color: var(--swufe-gold); color: var(--swufe-dark-blue); }
+
+        /* Club Intro */
+        .intro-block {
+            max-width: 900px;
+            margin: 0 auto 80px;
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--swufe-gold);
+        }
+        .intro-title { font-size: 2rem; color: var(--swufe-dark-blue); margin-bottom: 20px; font-weight: 700; }
+        .intro-text { font-size: 1.1rem; color: #555; margin-bottom: 0; line-height: 1.8; }
+        .intro-highlight { color: var(--swufe-blue); font-weight: 700; }
+
+        /* Content Blocks (Adaptive Images) */
+        .content-block { padding: 40px 5%; max-width: 1300px; margin: 0 auto; }
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px; align-items: center; margin-bottom: 100px; }
+        .feature-grid.reverse { direction: rtl; } 
+        .feature-grid.reverse .feature-text { direction: ltr; } 
+        
+        /* Changed for adaptive size */
+        .feature-image { 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: var(--card-shadow); 
+            width: 100%; 
+            align-self: start; 
+        }
+        .feature-image img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            transition: transform 0.5s; 
+        }
+        .feature-image:hover img { transform: scale(1.03); }
+        .feature-text { padding: 20px; }
+        .feature-label { color: var(--swufe-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .feature-head { font-size: 2rem; font-weight: 700; color: var(--swufe-blue); margin-bottom: 20px; line-height: 1.2; }
+        
+        /* Awards */
+        .awards-section { background-color: #f0f4f8; padding: 80px 5%; }
+        .block-header { text-align: center; margin-bottom: 60px; }
+        .block-title { font-size: 2.2rem; color: var(--swufe-dark-blue); font-weight: 700; margin-bottom: 15px; }
+        .award-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .award-card { background: white; padding: 25px; border-radius: 8px; border-left: 5px solid var(--swufe-gold); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .award-card:hover { transform: translateY(-5px); }
+        .award-year { background: var(--swufe-dark-blue); color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+        .award-title { font-weight: 700; color: var(--text-dark); font-size: 1.1rem; line-height: 1.4; }
+        .award-level { color: var(--swufe-blue); font-size: 0.9rem; margin-top: 5px; font-weight: 500; }
+
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; margin-top: 0; }
+        @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; direction: ltr !important; } .hero-title { font-size: 2.5rem; } .nav-links { display: none; } .carousel-slide { height: 300px; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index-cn.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+     <div class="nav-links">
+            <a href="index-cn.html">首页</a>
+            <a href="curriculum-cn.html">课程设置</a>
+            <a href="faculty-cn.html">师资力量</a>
+            <a href="student-experience-cn.html">学生体验</a>
+            <a href="admissions-cn.html">招生信息</a>
+        </div>
+        <a href="student experience.html" class="lang-switch">EN</a>
+    </nav>
+
+    <section class="hero-section">
+        <h1 class="hero-title">以赛促学，实战为王<br>定义未来的商业创新</h1>
+        <p class="hero-subtitle">加入一个充满活力的创新社区。从紧跟前沿的AI讲座到国家级竞赛金奖，你的学习之旅将超越课堂，直通未来。</p>
+    </section>
+
+    <div class="carousel-container">
+        <div class="carousel-slide fade" style="display: block;">
+            <img src="images/activity1.jpg" onerror="this.src='https://via.placeholder.com/1200x500/002a5c/ffffff?text=商业+AI+应用'" alt="商业AI大赛">
+            <div class="carousel-caption">
+                <h3>商业 AI 应用先锋</h3>
+                <p>在 2025 百度商业 AI 技术创新大赛中斩获全国前六强，展现卓越技术落地能力。</p>
+            </div>
+        </div>
+
+        <div class="carousel-slide fade">
+            <img src="images/activity2.jpg" onerror="this.src='https://via.placeholder.com/1200x500/004ea2/ffffff?text=国家级竞赛荣誉'" alt="iCAN Awards">
+            <div class="carousel-caption">
+                <h3>国家级竞赛荣誉</h3>
+                <p>我校学生荣获 2025 全国大学生“人工智能+”创新创业大赛金奖。</p>
+            </div>
+        </div>
+
+        <div class="carousel-slide fade">
+            <img src="images/activity3.jpg" onerror="this.src='https://via.placeholder.com/1200x500/0066cc/ffffff?text=全球技术视野'" alt="亚马逊云科技峰会">
+            <div class="carousel-caption">
+                <h3>全球技术视野</h3>
+                <p>参加亚马逊云科技峰会，接触最前沿的生成式 AI 技术趋势。</p>
+            </div>
+        </div>
+
+        <div class="carousel-slide fade">
+            <img src="images/activity4.jpg" onerror="this.src='https://via.placeholder.com/1200x500/0099cc/ffffff?text=数字贸易洞察'" alt="成都人工智能数字贸易中心">
+            <div class="carousel-caption">
+                <h3>数字贸易洞察</h3>
+                <p>参访成都人工智能数字贸易中心，亲眼见证智能商业与现代贸易的融合。</p>
+            </div>
+        </div>
+
+        <div class="carousel-slide fade">
+            <img src="images/activity5.jpg" onerror="this.src='https://via.placeholder.com/1200x500/FFB81C/000000?text=前沿技术体验'" alt="明途科技参访">
+            <div class="carousel-caption">
+                <h3>前沿技术体验</h3>
+                <p>参访明途科技，实地体验“数字人”与“工作元宇宙”的前沿商业应用。</p>
+            </div>
+        </div>
+
+        <div class="carousel-slide fade">
+            <img src="images/activity6.jpg" onerror="this.src='https://via.placeholder.com/1200x500/cc3300/ffffff?text=深度商业研讨'" alt="谷小智调研">
+            <div class="carousel-caption">
+                <h3>深度商业研讨</h3>
+                <p>深入调研谷小智人工智能科技集团，探究 AI 智能体背后的商业逻辑。</p>
+            </div>
+        </div>
+        
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <div class="intro-block">
+        <h2 class="intro-title">创新核心：AI商务菁英社团</h2>
+        <p class="intro-text">
+            为了搭建学术理论与商业实践之间的桥梁，西南财经大学电子商务系特别成立了<span class="intro-highlight">“AI商务菁英社团”</span>。
+            这是本专业核心的实践平台，面向全校学生开放，致力于组建跨学科的协作团队。在这里，你将通过参加竞赛、项目孵化和科研探索，从入学第一天起就开始解决真实的商业挑战。
+        </p>
+    </div>
+
+    <div class="content-block">
+        
+        <div class="feature-grid">
+            <div class="feature-text">
+                <span class="feature-label">前沿洞察</span>
+                <h2 class="feature-head">开展 AI 应用讲座</h2>
+                <p style="margin-bottom:20px; color:#555; line-height: 1.8;">
+                    我们定期邀请来自学术界与业界的知名专家，分享人工智能领域的最新前沿。系列讲座涵盖<strong>生成式 AI 应用</strong>、<strong>智能体商务 (Agentic Commerce)</strong> 和<strong>消费元宇宙</strong>等关键主题，确保学生的知识体系始终与技术变革同步。
+                </p>
+            </div>
+            <div class="feature-image">
+                <img src="images/lecture.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=AI+讲座'" alt="AI Lectures">
+            </div>
+        </div>
+
+        <div class="feature-grid reverse">
+            <div class="feature-text">
+                <span class="feature-label">以赛促学</span>
+                <h2 class="feature-head">举办 AI 应用竞赛</h2>
+                <p style="margin-bottom:20px; color:#555; line-height: 1.8;">
+                    秉持<strong>“以赛促学，以赛促教”</strong>的理念，我们通过主办和承办各类高水平赛事，为学生搭建施展才华的实战舞台。无论是<strong>“智能助理虚拟形象设计大赛”</strong>、<strong>四川省“AI 智能体+”创新设计大赛</strong>，还是<strong>全国大学生“三创赛”</strong>校级选拔，我们致力于通过竞赛激发学生的无限创新潜能。
+                </p>
+            </div>
+            <div class="feature-image">
+                <img src="images/competition-host.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=举办竞赛'" alt="Hosting Competitions">
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-text">
+                <span class="feature-label">链接产业</span>
+                <h2 class="feature-head">调研 AI 应用企业</h2>
+                <p style="margin-bottom:20px; color:#555; line-height: 1.8;">
+                    我们坚信课堂没有围墙。通过<strong>“向智而行”</strong>系列活动，我们带领学生走出校园，走进<strong>明途科技</strong>、<strong>谷小智</strong>等 AI企业，以及<strong>成都人工智能数字贸易中心</strong>进行实地研讨。此外，我们还组织学生参加<strong>亚马逊云科技峰会</strong>等行业会议，让学生亲眼见证生成式 AI 技术如何在真实商业场景中落地。
+                </p>
+            </div>
+            <div class="feature-image">
+                <img src="images/visit.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=企业调研'" alt="Enterprise Survey">
+            </div>
+        </div>
+
+        <div class="feature-grid reverse">
+            <div class="feature-text">
+                <span class="feature-label">成果转化</span>
+                <h2 class="feature-head">参加 AI 应用竞赛与项目</h2>
+                <p style="margin-bottom:20px; color:#555; line-height: 1.8;">
+                    学生不仅学习理论，更亲手开发真实的 AI 智能体应用。我们鼓励学生将<strong>供应链金融</strong>、<strong>文旅服务</strong>等领域的自主研发项目转化为参赛作品。凭借扎实的技术与商业逻辑，我们的学生在 <strong>iCAN 创新创业大赛</strong>、<strong>“互联网+”</strong>等国家级舞台上屡获殊荣，真正实现了从创意到产品的跨越。
+                </p>
+            </div>
+            <div class="feature-image">
+                <img src="images/project.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=参赛与项目'" alt="Projects and Awards">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="aimi-section" style="background: linear-gradient(120deg, #f0f7ff 0%, #ffffff 100%); padding: 100px 5%; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -50px; right: -50px; width: 300px; height: 300px; background: rgba(0, 78, 162, 0.05); border-radius: 50%;"></div>
+        
+        <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 80px; flex-wrap: wrap-reverse;">
+            
+            <div style="flex: 1; min-width: 320px;">
+                <span style="display: inline-block; background: rgba(255, 184, 28, 0.2); color: #b38000; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; margin-bottom: 15px;">开发中 · COMING SOON</span>
+                <h2 style="font-size: 2.8rem; color: var(--swufe-dark-blue); margin: 0 0 25px; line-height: 1.1; font-weight: 800;">
+                    遇见 <span style="color: var(--swufe-blue);">AIMI</span>，<br>你的专属 AI 校园伙伴
+                </h2>
+                
+                <div style="border-left: 4px solid var(--swufe-gold); padding-left: 20px; margin-bottom: 25px;">
+                    <p style="color: #444; font-size: 1.1rem; font-style: italic; margin: 0;">
+                        “你好呀！我是 AIMI。不跑代码的时候，我最喜欢在**图书馆露台**吹风，或者去**三味堂吃钵钵鸡**！”
+                    </p>
+                </div>
+
+                <p style="color: #666; margin-bottom: 30px; line-height: 1.8;">
+                    AIMI 是我们系正在孵化的**专属智能助理**。她不仅仅是一个数字人，更是你未来的大学向导。目前她正在接受“特训”，未来将辅助你的课程规划、校园导航和生活服务。
+                    <br>
+                    <strong>加入我们，你不仅是使用者，更是她的“训练师”。</strong>
+                </p>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <span style="background: white; border: 1px solid #e0e0e0; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; color: #555; display: flex; align-items: center;">🤖 AI 原生</span>
+                    <span style="background: white; border: 1px solid #e0e0e0; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; color: #555; display: flex; align-items: center;">🍡 钵钵鸡爱好者</span>
+                    <span style="background: white; border: 1px solid #e0e0e0; padding: 8px 16px; border-radius: 6px; font-size: 0.9rem; color: #555; display: flex; align-items: center;">🌃 柳浪湾向导</span>
+                </div>
+            </div>
+
+            <div style="flex: 0 0 350px; position: relative;">
+                <div style="position: absolute; width: 360px; height: 360px; background: radial-gradient(circle, rgba(0,78,162,0.2) 0%, rgba(255,255,255,0) 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%;"></div>
+                
+                <img src="images/aimi-avatar.jpg" alt="AIMI Avatar" style="width: 350px; height: 350px; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); position: relative; z-index: 2; border: 4px solid white;">
+                
+                <div style="position: absolute; bottom: -20px; right: -20px; background: white; padding: 15px 25px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 3; display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 10px #2ecc71;"></div>
+                    <span style="font-weight: 700; color: var(--swufe-dark-blue); font-size: 0.9rem;">正在学习中...</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="awards-section">
+        <div class="block-header">
+            <h2 class="block-title">2025 年度竞赛荣誉</h2>
+            <p class="block-desc">在团队的系统化指导下，学生将 AI 技术应用于商业实战，在各类高水平学科竞赛中斩获佳绩。</p>
+        </div>
+        <div class="award-grid">
+            <div class="award-card">
+                <span class="award-year">2025</span>
+                <div class="award-title">iCAN 大学生创新创业大赛（AI挑战赛）</div>
+                <div class="award-level">全国一等奖</div>
+            </div>
+            <div class="award-card">
+                <span class="award-year">2025</span>
+                <div class="award-title">全国大学生“人工智能+”创新创业大赛</div>
+                <div class="award-level">金奖</div>
+            </div>
+            <div class="award-card">
+                <span class="award-year">2025</span>
+                <div class="award-title">中国研究生企业管理创新大赛（AI赛道）</div>
+                <div class="award-level">全国一等奖</div>
+            </div>
+            <div class="award-card">
+                <span class="award-year">2025</span>
+                <div class="award-title">百度商业 AI 技术创新大赛</div>
+                <div class="award-level">全国三等奖（全国前六强）</div>
+            </div>
+            <div class="award-card">
+                <span class="award-year">2025</span>
+                <div class="award-title">第十五届全国大学生电子商务“三创赛”</div>
+                <div class="award-level">省级一等奖</div>
+            </div>
+            <div class="award-card">
+                <span class="award-year">2025</span>
+                <div class="award-title">四川省第一届“AI 智能体+”创新设计大赛</div>
+                <div class="award-level">一等奖</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 西南财经大学. 版权所有.</p>
+    </footer>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("carousel-slide");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slides[slideIndex-1].style.display = "block";  
+        }
+
+        // 自动轮播
+        setInterval(function() {
+            plusSlides(1);
+        }, 5000); 
+    </script>
+
+</body>
+</html>

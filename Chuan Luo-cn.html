@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>罗川 教授 | SWUFE AI for Business</title>
+    <style>
+        :root { --swufe-blue: #004ea2; --swufe-dark-blue: #002a5c; --swufe-gold: #FFB81C; --text-dark: #222222; --text-grey: #555555; --bg-light: #f9fafb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); overflow-x: hidden; }
+
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .logo-box img { width: auto; height: 92%; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: #fff; font-weight: 800; font-size: 1.5rem; line-height: 1; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        
+        .lang-switch { 
+            color: #ffffff !important;
+            border: 1px solid rgba(255,255,255, 0.8);
+            padding: 5px 12px;
+            border-radius: 4px;
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); border-color: #ffffff; }
+        
+        .profile-container { max-width: 1200px; margin: 120px auto 60px; padding: 0 5%; display: grid; grid-template-columns: 300px 1fr; gap: 4rem; }
+        .profile-sidebar { position: sticky; top: 100px; height: fit-content; }
+        .profile-photo { width: 100%; height: 380px; background-color: #eee; border-radius: 8px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+        .contact-info h3 { font-size: 1.1rem; color: var(--swufe-blue); margin-bottom: 1rem; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px; display: inline-block; }
+        .contact-item { margin-bottom: 0.8rem; font-size: 0.95rem; color: #555; display: flex; align-items: center; gap: 10px; }
+        .contact-icon { font-size: 1.1rem; color: var(--swufe-blue); width: 20px; text-align: center; }
+        
+        .profile-content { background: #fff; padding: 2rem 0; }
+        .prof-header { margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+        .prof-name-large { font-size: 2.5rem; font-weight: 800; color: var(--swufe-dark-blue); margin-bottom: 0.5rem; }
+        .prof-title-large { font-size: 1.2rem; color: #666; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+        .content-section { margin-bottom: 3rem; }
+        .section-heading { font-size: 1.5rem; color: var(--swufe-blue); margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; }
+        .section-heading::before { content: ''; display: block; width: 6px; height: 24px; background: var(--swufe-gold); margin-right: 12px; border-radius: 2px; }
+
+        .research-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+        .tag-large { background: #f0f7ff; color: var(--swufe-blue); padding: 6px 15px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border: 1px solid #d0e4ff; }
+
+        .publication-list { list-style: none; padding-left: 0; }
+        .publication-list li { margin-bottom: 1.2rem; padding-left: 20px; position: relative; color: #444; font-size: 0.95rem; }
+        .publication-list li::before { content: '•'; color: var(--swufe-gold); font-weight: bold; position: absolute; left: 0; }
+        
+        .edu-list { list-style: none; padding: 0; }
+        .edu-list li { margin-bottom: 1rem; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .edu-degree { font-weight: 700; color: var(--text-dark); display: block; }
+        .edu-school { color: #666; font-size: 0.9rem; }
+
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; margin-top: 4rem; }
+
+        @media (max-width: 900px) {
+            .profile-container { grid-template-columns: 1fr; gap: 2rem; }
+            .profile-sidebar { position: static; max-width: 400px; margin: 0 auto; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index-cn.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+        <div class="nav-links">
+            <a href="index-cn.html">首页</a>
+            <a href="curriculum-cn.html">课程设置</a>
+            <a href="faculty-cn.html" class="active">师资力量</a>
+            <a href="#">学生体验</a>
+            <a href="#">招生信息</a>
+        </div>
+        <a href="Chuan Luo.html" class="lang-switch">EN</a>
+    </nav>
+
+    <div class="profile-container">
+        
+        <aside class="profile-sidebar">
+            <div class="profile-photo">
+                <img src="images/luochuan.jpg" alt="罗川教授" onerror="this.src='https://via.placeholder.com/400x500?text=Prof.+Luo'">
+            </div>
+            
+            <div class="contact-info">
+                <h3>联系方式</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:Luochuan@swufe.edu.cn" style="color:#555; text-decoration:none;">Luochuan@swufe.edu.cn</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>西南财经大学 管理科学与工程学院</span>
+                </div>
+            </div>
+
+            <div class="contact-info" style="margin-top: 2rem;">
+                <h3>教育背景</h3>
+                <ul class="edu-list">
+                    <li>
+                        <span class="edu-degree">管理信息系统 博士</span>
+                        <span class="edu-school">香港城市大学 (2010)</span>
+                    </li>
+                    <li>
+                        <span class="edu-degree">管理科学与工程 博士</span>
+                        <span class="edu-school">中国科学技术大学 (2009)</span>
+                    </li>
+                    <li>
+                        <span class="edu-degree">科技英语 学士</span>
+                        <span class="edu-school">中国科学技术大学 (2003)</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="profile-content">
+            
+            <div class="prof-header">
+                <h1 class="prof-name-large">罗川</h1>
+                <div class="prof-title-large">教授、博士生导师</div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">个人简介</div>
+                <p>
+                    罗川，现任西南财经大学管理科学与工程学院教授，博士生导师。曾任香港城市大学高级副研究员。
+                </p>
+                <p>
+                    四川省商务厅、成都市商委电子商务专家，国际信息系统协会（AIS）亚太分会执行委员。多次担任 PACIS, AMCIS 等国际著名会议的分会主席或程序委员会主席。担任 JAIS, I&M, DSS, IJEC 等数十本 SCI/SSCI 期刊审稿人。主持或参与了多项国家社科、自科、教育部及中央高校基本科研项目。
+                </p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">研究领域</div>
+                <div class="research-tags">
+                    <span class="tag-large">网络社交商务</span>
+                    <span class="tag-large">互联网金融</span>
+                    <span class="tag-large">跨境电子商务</span>
+                    <span class="tag-large">共享经济</span>
+                    <span class="tag-large">大数据行为分析</span>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">代表性成果</div>
+                <ul class="publication-list">
+                    <li>
+                        <strong>罗川</strong> 等. "Examining the moderating role of sense of membership in online review evaluations". <em>Information & Management</em>, 2015. (SCI/SSCI, JCR 1区)
+                    </li>
+                    <li>
+                        <strong>罗川</strong> 等. "The effects of individualism–collectivism cultural orientation on eWOM information". <em>International Journal of Information Management</em>, 2014. (SSCI, JCR 1区)
+                    </li>
+                    <li>
+                        <strong>罗川</strong> 等. "Impact of informational factors on online recommendation credibility". <em>Decision Support Systems</em>, 2013. (SCI, JCR 1区)
+                    </li>
+                    <li>
+                        <strong>罗川</strong> 等. "Information usefulness in online third party forums". <em>Computers in Human Behavior</em>, 2018. (SSCI, JCR 1区)
+                    </li>
+                    <li>
+                        <strong>罗川</strong> (通讯作者). "Credibility of Electronic Word-Of-Mouth". <em>International Journal of Electronic Commerce</em>, 2009. (SCI/SSCI, JCR 1区)
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">教学与荣誉</div>
+                <p><strong>讲授课程：</strong> 电子商务、商务研究方法</p>
+                <p><strong>荣誉奖励：</strong></p>
+                <ul style="padding-left: 20px; color:#555;">
+                    <li>2007年 亚太信息系统会议 (PACIS) 唯一最佳论文奖</li>
+                    <li>2015年 西南财经大学优秀科研成果奖</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 西南财经大学. 版权所有.</p>
+    </footer>
+
+</body>
+</html>

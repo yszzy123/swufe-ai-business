@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof. Jing Wu | SWUFE AI for Business</title>
+    <style>
+        /* === 复用标准样式 === */
+        :root { --swufe-blue: #004ea2; --swufe-dark-blue: #002a5c; --swufe-gold: #FFB81C; --text-dark: #222222; --text-grey: #555555; --bg-light: #f9fafb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); overflow-x: hidden; }
+
+        /* Navigation */
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .logo-box img { width: auto; height: 92%; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: #fff; font-weight: 800; font-size: 1.5rem; line-height: 1; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        .nav-links a.active { color: var(--swufe-gold); font-weight: 700; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px;} 
+
+        /* Language Button */
+        .lang-switch { 
+            color: #ffffff !important;
+            border: 1px solid rgba(255,255,255, 0.8);
+            padding: 5px 12px;
+            border-radius: 4px;
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); border-color: #ffffff; }
+        
+        /* Layout */
+        .profile-container { max-width: 1200px; margin: 120px auto 60px; padding: 0 5%; display: grid; grid-template-columns: 300px 1fr; gap: 4rem; }
+        .profile-sidebar { position: sticky; top: 100px; height: fit-content; }
+        .profile-photo { width: 100%; height: 380px; background-color: #eee; border-radius: 8px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+        
+        .contact-info h3 { font-size: 1.1rem; color: var(--swufe-blue); margin-bottom: 1rem; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px; display: inline-block; }
+        .contact-item { margin-bottom: 0.8rem; font-size: 0.95rem; color: #555; display: flex; align-items: center; gap: 10px; }
+        .contact-icon { font-size: 1.1rem; color: var(--swufe-blue); width: 20px; text-align: center; }
+        
+        .profile-content { background: #fff; padding: 2rem 0; }
+        .prof-header { margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+        .prof-name-large { font-size: 2.5rem; font-weight: 800; color: var(--swufe-dark-blue); margin-bottom: 0.5rem; }
+        .prof-title-large { font-size: 1.2rem; color: #666; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+        .content-section { margin-bottom: 3rem; }
+        .section-heading { font-size: 1.5rem; color: var(--swufe-blue); margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; }
+        .section-heading::before { content: ''; display: block; width: 6px; height: 24px; background: var(--swufe-gold); margin-right: 12px; border-radius: 2px; }
+
+        .research-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+        .tag-large { background: #f0f7ff; color: var(--swufe-blue); padding: 6px 15px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border: 1px solid #d0e4ff; }
+
+        .publication-list { list-style: none; padding-left: 0; }
+        .publication-list li { margin-bottom: 1.2rem; padding-left: 20px; position: relative; color: #444; font-size: 0.95rem; }
+        .publication-list li::before { content: '•'; color: var(--swufe-gold); font-weight: bold; position: absolute; left: 0; }
+        
+        .edu-list { list-style: none; padding: 0; }
+        .edu-list li { margin-bottom: 1rem; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .edu-degree { font-weight: 700; color: var(--text-dark); display: block; }
+        .edu-school { color: #666; font-size: 0.9rem; }
+
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; margin-top: 4rem; }
+
+        @media (max-width: 900px) {
+            .profile-container { grid-template-columns: 1fr; gap: 2rem; }
+            .profile-sidebar { position: static; max-width: 400px; margin: 0 auto; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="curriculum.html">Curriculum</a>
+            <a href="faculty.html" class="active">Faculty</a>
+            <a href="#">Student Experience</a>
+            <a href="#">Admissions</a>
+        </div>
+        <a href="Jing Wu-cn.html" class="lang-switch">CN</a>
+    </nav>
+
+    <div class="profile-container">
+        
+        <aside class="profile-sidebar">
+            <div class="profile-photo">
+                <img src="images/wujing.jpg" alt="Prof. Jing Wu" onerror="this.src='https://via.placeholder.com/400x500?text=Prof.+Wu'">
+            </div>
+            
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:kaitlynwu@swufe.edu.cn" style="color:#555; text-decoration:none;">kaitlynwu@swufe.edu.cn</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>School of Management Science and Engineering</span>
+                </div>
+            </div>
+
+            <div class="contact-info" style="margin-top: 2rem;">
+                <h3>Education</h3>
+                <ul class="edu-list">
+                    <li>
+                        <span class="edu-degree">Ph.D. in Information Systems</span>
+                        <span class="edu-school">National University of Singapore (NUS)</span>
+                    </li>
+                    <li>
+                        <span class="edu-degree">MSc in Economics</span>
+                        <span class="edu-school">Hong Kong University of Science and Technology (HKUST)</span>
+                    </li>
+                    <li>
+                        <span class="edu-degree">B.E. in Electronic Information Eng.</span>
+                        <span class="edu-school">Northwestern Polytechnical University</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="profile-content">
+            
+            <div class="prof-header">
+                <h1 class="prof-name-large">Jing Wu</h1>
+                <div class="prof-title-large">Professor & Doctoral Supervisor</div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">Biography</div>
+                <p>
+                    Dr. Jing Wu is a Professor and Doctoral Supervisor at the School of Management Science and Engineering, Southwestern University of Finance and Economics (SWUFE). She obtained her Ph.D. in Information Systems from the National University of Singapore (NUS) in 2009.
+                </p>
+                <p>
+                    Before joining SWUFE, she served as a lecturer at the Singapore Institute of Management and a researcher at the Lee Kuan Yew School of Public Policy, NUS. Her research interests span Digital Economics, Open Innovation, and E-commerce. She has published over 30 academic papers in prestigious international and domestic journals, including <em>International Journal of Production Research</em>, <em>Information & Management</em>, and <em>Electronic Commerce Research and Applications</em>.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">Research Interests</div>
+                <div class="research-tags">
+                    <span class="tag-large">Digital Economics</span>
+                    <span class="tag-large">Open Innovation</span>
+                    <span class="tag-large">E-commerce</span>
+                    <span class="tag-large">Big Data Analytics</span>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">Selected Publications</div>
+                <ul class="publication-list">
+                    <li>
+                        <strong>Jing Wu*</strong>, Ling Liu, Yu Cao. "Understanding Investor Co-Investment in a Syndicate on Equity Crowdfunding Platforms". <em>Industrial Management & Data Systems</em>, 2023.
+                    </li>
+                    <li>
+                        <strong>Jing Wu</strong>, He Li*, Ling Liu, Yun Xu. "Prior Ties, Investor Role, and Venture Capital Syndication". <em>Small Business Economics</em>, 56, 1449–1459, 2021.
+                    </li>
+                    <li>
+                        <strong>Jing Wu*</strong>, He Li, Zhangxi Lin, Haichao Zheng. "Competition in Wearable Device Market: the Effect of Network Externality and Product Compatibility". <em>Electronic Commerce Research</em>, 17(3), 335-359, 2017.
+                    </li>
+                    <li>
+                        <strong>Jing Wu*</strong>, He Li, Zhangxi Lin, Khim-Yong Goh. "How Big Data and Analytics Reshape the Wearable Device Market – the Context of E-Health". <em>International Journal of Production Research</em>, 55(17), 5168-5182, 2017.
+                    </li>
+                    <li>
+                        <strong>Jing Wu*</strong>, He Li, Ling Liu, Haichao Zheng. "Adoption of Big Data and Analytics in Mobile Healthcare Market: An Economic Perspective". <em>Electronic Commerce Research and Applications</em>, 22, 24-41, 2017.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">Academic Experience</div>
+                <p><strong>Work History:</strong></p>
+                <ul style="padding-left: 20px; color:#555;">
+                    <li>2022.06 – Present: Professor, School of Management Science and Engineering, SWUFE</li>
+                    <li>2017.12 – 2022.06: Professor, School of Economic Information Engineering, SWUFE</li>
+                    <li>2011.06 – 2017.12: Associate Professor, SWUFE</li>
+                    <li>2010.06 – 2011.05: Lecturer, Singapore Institute of Management (SIM)</li>
+                    <li>2009.08 – 2010.01: Researcher, Lee Kuan Yew School of Public Policy, NUS</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 Southwestern University of Finance and Economics. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

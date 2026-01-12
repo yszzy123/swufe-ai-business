@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赖超 老师 | SWUFE AI for Business</title>
+    <style>
+        /* 复用英文版样式 */
+        :root { --swufe-blue: #004ea2; --swufe-dark-blue: #002a5c; --swufe-gold: #FFB81C; --text-dark: #222222; --text-grey: #555555; --bg-light: #f9fafb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .logo-box img { width: auto; height: 92%; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: #fff; font-weight: 800; font-size: 1.5rem; line-height: 1; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        .lang-switch { color: #ffffff !important; border: 1px solid rgba(255,255,255, 0.8); padding: 5px 12px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: all 0.3s ease; margin-left: 1rem; }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); border-color: #ffffff; }
+        .admin-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 120px 5% 60px; }
+        .admin-card { background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; max-width: 900px; width: 100%; overflow: hidden; border: 1px solid #eee; }
+        .admin-photo { width: 35%; min-width: 280px; background-color: #f4f4f4; position: relative; }
+        .admin-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .admin-info { padding: 3rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .admin-name { font-size: 2.2rem; font-weight: 700; color: var(--swufe-dark-blue); margin-bottom: 0.5rem; }
+        .admin-title { font-size: 1.1rem; color: var(--swufe-gold); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #eee; }
+        .admin-details { list-style: none; padding: 0; }
+        .admin-details li { margin-bottom: 1rem; font-size: 1rem; color: #555; display: flex; align-items: center; }
+        .detail-icon { width: 24px; margin-right: 15px; text-align: center; font-size: 1.2rem; }
+        .detail-label { font-weight: 600; color: var(--text-dark); margin-right: 8px; min-width: 80px; }
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; margin-top: auto; }
+        @media (max-width: 768px) { .admin-card { flex-direction: column; } .admin-photo { width: 100%; height: 350px; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index-cn.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+        <div class="nav-links">
+            <a href="index-cn.html">首页</a>
+            <a href="curriculum-cn.html">课程设置</a>
+            <a href="faculty-cn.html" class="active">师资力量</a>
+            <a href="#">学生体验</a>
+            <a href="#">招生信息</a>
+        </div>
+        <a href="Chao Lai.html" class="lang-switch">EN</a>
+    </nav>
+
+    <div class="admin-container">
+        <div class="admin-card">
+            <div class="admin-photo">
+                <img src="images/laichao.jpg" alt="赖超老师" onerror="this.src='https://via.placeholder.com/400x500?text=赖超'">
+            </div>
+            <div class="admin-info">
+                <h1 class="admin-name">赖超</h1>
+                <div class="admin-title">学院本科教学秘书</div>
+                
+                <ul class="admin-details">
+                    <li>
+                        <span class="detail-icon">🏢</span>
+                        <span class="detail-label">办公室：</span>
+                        通博楼 D401
+                    </li>
+                    <li>
+                        <span class="detail-icon">📞</span>
+                        <span class="detail-label">电话：</span>
+                        028-87081922
+                    </li>
+                    <li>
+                        <span class="detail-icon">✉️</span>
+                        <span class="detail-label">邮箱：</span>
+                        <a href="mailto:laichao@swufe.edu.cn" style="color:var(--swufe-blue); text-decoration:none;">laichao@swufe.edu.cn</a>
+                    </li>
+                    <li>
+                        <span class="detail-icon">🌐</span>
+                        <span class="detail-label">职责：</span>
+                        负责本科生教学运行、选课管理及教务管理工作。
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 西南财经大学. 版权所有.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assoc. Prof. Yun Zhang | SWUFE AI for Business</title>
+    <style>
+        /* === Standard Styles === */
+        :root { --swufe-blue: #004ea2; --swufe-dark-blue: #002a5c; --swufe-gold: #FFB81C; --text-dark: #222222; --text-grey: #555555; --bg-light: #f9fafb; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); overflow-x: hidden; }
+
+        /* Navigation */
+        nav { background-color: var(--swufe-blue); padding: 0.6rem 4%; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        .logo-box { background-color: #ffffff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+        .logo-box img { width: auto; height: 92%; }
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { color: #fff; font-weight: 800; font-size: 1.5rem; line-height: 1; margin-bottom: 3px; }
+        .brand-fullname { color: rgba(255, 255, 255, 0.8); font-size: 0.5rem; font-weight: 500; text-transform: uppercase; line-height: 1.4; display: flex; flex-direction: column; }
+        .logo-divider { height: 38px; width: 1px; background-color: rgba(255, 255, 255, 0.3); margin: 0 15px; }
+        .program-text { color: var(--swufe-gold); font-weight: 600; font-size: 1.1rem; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        .nav-links a.active { color: var(--swufe-gold); font-weight: 700; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px;} 
+
+        /* Language Button */
+        .lang-switch { 
+            color: #ffffff !important;
+            border: 1px solid rgba(255,255,255, 0.8);
+            padding: 5px 12px;
+            border-radius: 4px;
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); border-color: #ffffff; }
+        
+        /* Layout */
+        .profile-container { max-width: 1200px; margin: 120px auto 60px; padding: 0 5%; display: grid; grid-template-columns: 300px 1fr; gap: 4rem; }
+        .profile-sidebar { position: sticky; top: 100px; height: fit-content; }
+        .profile-photo { width: 100%; height: 380px; background-color: #eee; border-radius: 8px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+        
+        .contact-info h3 { font-size: 1.1rem; color: var(--swufe-blue); margin-bottom: 1rem; border-bottom: 2px solid var(--swufe-gold); padding-bottom: 5px; display: inline-block; }
+        .contact-item { margin-bottom: 0.8rem; font-size: 0.95rem; color: #555; display: flex; align-items: center; gap: 10px; }
+        .contact-icon { font-size: 1.1rem; color: var(--swufe-blue); width: 20px; text-align: center; }
+        
+        .profile-content { background: #fff; padding: 2rem 0; }
+        .prof-header { margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+        .prof-name-large { font-size: 2.5rem; font-weight: 800; color: var(--swufe-dark-blue); margin-bottom: 0.5rem; }
+        .prof-title-large { font-size: 1.2rem; color: #666; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+        .content-section { margin-bottom: 3rem; }
+        .section-heading { font-size: 1.5rem; color: var(--swufe-blue); margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; }
+        .section-heading::before { content: ''; display: block; width: 6px; height: 24px; background: var(--swufe-gold); margin-right: 12px; border-radius: 2px; }
+
+        .research-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+        .tag-large { background: #f0f7ff; color: var(--swufe-blue); padding: 6px 15px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border: 1px solid #d0e4ff; }
+
+        .publication-list { list-style: none; padding-left: 0; }
+        .publication-list li { margin-bottom: 1.2rem; padding-left: 20px; position: relative; color: #444; font-size: 0.95rem; }
+        .publication-list li::before { content: '•'; color: var(--swufe-gold); font-weight: bold; position: absolute; left: 0; }
+        
+        .edu-list { list-style: none; padding: 0; }
+        .edu-list li { margin-bottom: 1rem; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
+        .edu-degree { font-weight: 700; color: var(--text-dark); display: block; }
+        .edu-school { color: #666; font-size: 0.9rem; }
+
+        footer { background-color: var(--swufe-dark-blue); color: rgba(255,255,255,0.6); padding: 3rem 5%; text-align: center; font-size: 0.9rem; margin-top: 4rem; }
+
+        @media (max-width: 900px) {
+            .profile-container { grid-template-columns: 1fr; gap: 2rem; }
+            .profile-sidebar { position: static; max-width: 400px; margin: 0 auto; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="curriculum.html">Curriculum</a>
+            <a href="faculty.html" class="active">Faculty</a>
+            <a href="#">Student Experience</a>
+            <a href="#">Admissions</a>
+        </div>
+        <a href="Yun Zhang-cn.html" class="lang-switch">CN</a>
+    </nav>
+
+    <div class="profile-container">
+        
+        <aside class="profile-sidebar">
+            <div class="profile-photo">
+                <img src="images/zhangyun.jpg" alt="Assoc. Prof. Yun Zhang" onerror="this.src='https://via.placeholder.com/400x500?text=Prof.+Zhang'">
+            </div>
+            
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <a href="mailto:zhangyun@swufe.edu.cn" style="color:#555; text-decoration:none;">zhangyun@swufe.edu.cn</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>School of Management Science and Engineering</span>
+                </div>
+            </div>
+
+            <div class="contact-info" style="margin-top: 2rem;">
+                <h3>Education</h3>
+                <ul class="edu-list">
+                    <li>
+                        <span class="edu-degree">Joint Ph.D. Program</span>
+                        <span class="edu-school">University of Queensland, Australia (2016-2018)</span>
+                    </li>
+                    <li>
+                        <span class="edu-degree">Ph.D. in Business Administration</span>
+                        <span class="edu-school">SWUFE (2018)</span>
+                    </li>
+                    <li>
+                        <span class="edu-degree">Bachelor in Business Admin.</span>
+                        <span class="edu-school">Sichuan Agricultural University (2012)</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="profile-content">
+            
+            <div class="prof-header">
+                <h1 class="prof-name-large">Yun Zhang</h1>
+                <div class="prof-title-large">Associate Professor & Doctoral Supervisor</div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">Biography</div>
+                <p>
+                    Dr. Yun Zhang is an Associate Professor and Deputy Director of the Department of E-commerce at SWUFE. She obtained her Ph.D. from SWUFE in 2018 and was a joint Ph.D. student at the University of Queensland, Australia.
+                </p>
+                <p>
+                    She leads the <strong>"AI Business" Team</strong> at SWUFE, focusing on frontier research in Artificial Intelligence, AIGC applications, and Human-Computer Interaction (HCI). Her team is dedicated to exploring AI solutions for business decision-making, user trust, and consumer behavior. She has presided over multiple projects funded by the National Natural Science Foundation of China (NSFC) and the Ministry of Education.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">Research Interests</div>
+                <div class="research-tags">
+                    <span class="tag-large">AI Commerce</span>
+                    <span class="tag-large">AIGC Applications</span>
+                    <span class="tag-large">Virtual Digital Humans</span>
+                    <span class="tag-large">Metaverse Marketing</span>
+                    <span class="tag-large">Human-AI Interaction</span>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">Selected Publications</div>
+                <ul class="publication-list">
+                    <li>
+                        <strong>Yun Zhang</strong>, Xia Li, Rongqin Liu, Qinghong Shuai, Caiyan Huang. "How facial cues of streamers drive purchase intention in live streaming commerce: Based on a lens model". <em>Journal of Business Research</em>, 190, 115193, 2025.
+                    </li>
+                    <li>
+                        Rongqin Liu, <strong>Yun Zhang*</strong>, Chuan Luo, Shangyu Tan, Yunqu Gong. "Review content type and hotel review helpfulness: Direct and moderating effects". <em>Information Technology and Management</em>, 25(4), 383-406, 2024.
+                    </li>
+                    <li>
+                        <strong>Yun Zhang</strong>, Chuan Luo, Hongyan Wang, Yang Chen. "A right to be forgotten: Retrospective privacy concerns in social networking services". <em>Behaviour & Information Technology</em>, 42(7), 829-850, 2023.
+                    </li>
+                    <li>
+                        <strong>Yun Zhang</strong>, Xinzhu Ran, Chuan Luo, Yue Gao, Yu Zhao & Qinghong Shuai. "Only visible for three days: Mining microblogs to understand reasons for using the Time Limit setting on WeChat Moments". <em>Computers in Human Behavior</em>, 134, 107316, 2022.
+                    </li>
+                    <li>
+                        <strong>Yun Zhang</strong>, Si Shi, Shijun Guo, Xiaogang Chen, Zhirong Piao. "Audience management, online turbulence and lurking in social networking services: A transactional process of stress perspective". <em>International Journal of Information Management</em>, 56, 102233, 2021.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <div class="section-heading">Teaching & Awards</div>
+                <p><strong>Teaching:</strong></p>
+                <ul style="padding-left: 20px; color:#555; margin-bottom: 1.5rem;">
+                    <li>AI Product Design</li>
+                    <li>Agent Design & Business Innovation</li>
+                    <li>Digital Management GAI Applications</li>
+                </ul>
+                <p><strong>Awards:</strong></p>
+                <ul style="padding-left: 20px; color:#555;">
+                    <li>1st Prize, 2025 iCAN National College Student Innovation & Entrepreneurship Competition (AI Challenge).</li>
+                    <li>Gold Award, 2025 National College Student "AI+" Innovation & Entrepreneurship Competition.</li>
+                    <li>1st Prize, 2025 China Graduate Enterprise Management Innovation Competition (AI Track).</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2026 Southwestern University of Finance and Economics. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

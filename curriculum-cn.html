@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课程体系 | 西南财经大学 AI商务</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === 核心变量 === */
+        :root {
+            --swufe-blue: #004ea2;
+            --swufe-dark: #002a5c;
+            --swufe-gold: #FFB81C;
+            --swufe-gold-light: #fff9eb;
+            --bg-body: #f8fafc;
+            --text-main: #0f172a;
+            --text-grey: #64748b; /* 用于正文描述 */
+            --border-color: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        /* =========================================
+           1. 顶部导航栏 (复刻您提供的旧代码样式)
+           ========================================= */
+        nav { 
+            background-color: var(--swufe-blue); 
+            padding: 0.6rem 4%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+
+        .logo-container { display: flex; align-items: center; text-decoration: none; gap: 12px; }
+        
+        /* Logo 白色盒子 */
+        .logo-box { 
+            background-color: #ffffff; 
+            width: 48px; height: 48px; 
+            display: flex; align-items: center; justify-content: center; 
+            border-radius: 4px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            flex-shrink: 0; 
+        }
+        .logo-box img { width: auto; height: 92%; display: block; } /* 占位符图片样式 */
+
+        /* SWUFE 文字部分 */
+        .brand-wrapper { display: flex; flex-direction: column; justify-content: center; }
+        .brand-acronym { 
+            color: #ffffff; 
+            font-weight: 800; 
+            font-size: 1.5rem; 
+            line-height: 1; 
+            letter-spacing: 0.5px; 
+            margin-bottom: 3px; 
+            font-family: 'Inter', sans-serif; /* 英文部分保持西文字体 */
+        }
+        .brand-fullname { 
+            color: rgba(255, 255, 255, 0.8); 
+            font-size: 0.5rem; 
+            font-weight: 500; 
+            text-transform: uppercase; 
+            letter-spacing: 0.8px; 
+            line-height: 1.4; 
+            display: flex; flex-direction: column; 
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* 竖线分割 */
+        .logo-divider { 
+            height: 38px; width: 1px; 
+            background-color: rgba(255, 255, 255, 0.3); 
+            margin: 0 15px; 
+        }
+
+        /* AI FOR BUSINESS 项目名 */
+        .program-text { 
+            color: var(--swufe-gold); 
+            font-weight: 700; 
+            font-size: 1.1rem; 
+            line-height: 1; 
+            letter-spacing: 0.5px; 
+            text-transform: uppercase; 
+            white-space: nowrap; 
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* 导航链接 */
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { 
+            color: #ffffff; 
+            text-decoration: none; 
+            font-weight: 500; 
+            transition: color 0.3s; 
+            font-size: 0.95rem; 
+            position: relative; 
+        }
+        .nav-links a:hover { color: var(--swufe-gold); }
+        
+        /* 激活状态 */
+        .nav-links a.active { 
+            color: var(--swufe-gold); 
+            font-weight: 700; 
+            border-bottom: 2px solid var(--swufe-gold); 
+            padding-bottom: 4px;
+        } 
+
+        /* 语言切换按钮 */
+        .lang-switch { 
+            color: #ffffff; 
+            border: 1px solid rgba(255,255,255,0.5); 
+            padding: 0.3rem 0.8rem; 
+            border-radius: 4px; 
+            text-decoration: none; 
+            font-size: 0.85rem; 
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+        .lang-switch:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+
+        /* =========================================
+           2. 页面主体内容 (保持新版的高端设计)
+           ========================================= */
+        
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--swufe-dark) 0%, #001e40 100%);
+            color: white;
+            padding: 140px 5% 60px; /* 增加顶部 padding 以避开固定导航栏 */
+            position: relative;
+        }
+        .header-content { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+        
+        .header-badge {
+            display: inline-block;
+            color: var(--swufe-gold);
+            border: 1px solid var(--swufe-gold);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            background: rgba(255, 184, 28, 0.05);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            max-width: 850px;
+            font-weight: 300;
+        }
+
+        /* 主容器 */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 3%;
+        }
+
+        /* 上部区域 */
+        .top-section {
+            display: flex;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            align-items: flex-start;
+        }
+
+        /* 左侧 Facts */
+        .sidebar-facts {
+            flex: 0 0 280px;
+            position: sticky;
+            top: 100px;
+        }
+
+        .facts-card {
+            background: white;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            border-top: 5px solid var(--swufe-gold);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .facts-card h2 {
+            font-size: 1.2rem;
+            color: var(--swufe-blue);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .fact-item { margin-bottom: 1.5rem; }
+        .fact-item:last-child { margin-bottom: 0; }
+        
+        .fact-label {
+            display: block;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        
+        .fact-value {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* 右侧 Modules Wrapper */
+        .modules-wrapper { flex: 1; }
+
+        .modules-intro {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .modules-intro h3 {
+            font-size: 1.6rem;
+            color: var(--swufe-dark);
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+        .modules-intro p {
+            color: var(--text-grey);
+            font-size: 1.05rem;
+            max-width: 900px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        /* Modules Row (横排) */
+        .modules-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .module-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.12);
+            border-color: var(--swufe-blue);
+            z-index: 10;
+        }
+
+        .card-header { margin-bottom: 1.5rem; }
+        
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--swufe-dark);
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+        
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-grey);
+            line-height: 1.6;
+            min-height: 3em;
+        }
+
+        .tags-container {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .course-tag {
+            font-size: 0.85rem;
+            color: #334155;
+            background: #f8fafc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            border-left: 3px solid #cbd5e1;
+            transition: all 0.2s;
+        }
+        
+        .module-card:hover .course-tag {
+            background: #f1f5f9;
+            border-left-color: var(--swufe-blue);
+        }
+
+        /* Flagship 样式 */
+        .module-card.flagship {
+            background: linear-gradient(to bottom, #fff, var(--swufe-gold-light));
+            border: 2px solid var(--swufe-gold);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px -5px rgba(255, 184, 28, 0.15);
+            position: relative;
+        }
+        
+        .module-card.flagship:hover {
+            transform: scale(1.05) translateY(-8px);
+            box-shadow: 0 25px 50px -10px rgba(255, 184, 28, 0.25);
+        }
+
+        .flagship-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--swufe-gold);
+            color: #0f172a;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .module-card.flagship .course-tag {
+            background: rgba(255, 255, 255, 0.6);
+            border-left-color: var(--swufe-gold);
+        }
+
+        /* 底部时间轴 */
+        .timeline-section {
+            border-top: 1px solid var(--border-color);
+            padding-top: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .timeline-header {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--swufe-dark);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .timeline-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+
+        .timeline-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 15px;
+            cursor: default;
+        }
+
+        .step-circle {
+            width: 42px;
+            height: 42px;
+            background: white;
+            border: 2px solid var(--swufe-blue);
+            color: var(--swufe-blue);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 0 0 8px var(--bg-body);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .timeline-step:hover .step-circle {
+            background: var(--swufe-blue);
+            color: white;
+            transform: scale(1.1);
+            border-color: var(--swufe-gold);
+            box-shadow: 0 0 0 8px var(--bg-body), 0 0 0 10px var(--swufe-gold);
+        }
+
+        .step-label {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--swufe-dark);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-desc {
+            font-size: 0.95rem;
+            color: var(--text-grey);
+            line-height: 1.5;
+        }
+
+        footer {
+            background: var(--swufe-dark);
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            padding: 4rem;
+            margin-top: 6rem;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 1200px) {
+            .modules-row { grid-template-columns: repeat(2, 1fr); }
+            .top-section { flex-direction: column; }
+            .sidebar-facts { width: 100%; position: static; margin-bottom: 2rem; }
+            .facts-card { border-radius: 8px; }
+        }
+        
+        @media (max-width: 900px) { 
+            .nav-links { display: none; } 
+            .main-container { flex-direction: column; } 
+        }
+
+        @media (max-width: 768px) {
+            .modules-row { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2.5rem; }
+            .timeline-container { flex-direction: column; gap: 2rem; }
+            .timeline-container::before { left: 20px; top: 0; bottom: 0; width: 2px; height: auto; }
+            .timeline-step { display: flex; text-align: left; gap: 1.5rem; padding: 0; }
+            .step-circle { margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo-container">
+            <div class="logo-box"><img src="images/swufe-logo.png" alt="SWUFE Logo"></div>
+            <div class="brand-wrapper">
+                <div class="brand-acronym">SWUFE</div>
+                <div class="brand-fullname">
+                    <div>Southwestern University</div>
+                    <div>of Finance and Economics</div>
+                </div>
+            </div>
+            <div class="logo-divider"></div>
+            <div class="program-text">AI FOR BUSINESS</div>
+        </a>
+         <div class="nav-links">
+            <a href="index-cn.html">首页</a>
+            <a href="curriculum-cn.html">课程设置</a>
+            <a href="faculty-cn.html" class="active">师资力量</a>
+           <a href="student experience-cn.html">学生体验</a>
+            <a href="admissions-cn.html">招生信息</a>
+        </div>
+        <a href="curriculum.html" class="lang-switch">EN</a>
+    </nav>
+
+    <header class="page-header">
+        <div class="header-content">
+            <div class="header-badge">2026版培养方案</div>
+            <h1>课程体系结构</h1>
+            <p>从电子商务到AI商务：融合管理科学与人工智能，培养未来商业领袖的多学科课程体系。</p>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="top-section">
+            
+            <aside class="sidebar-facts">
+                <div class="facts-card">
+                    <h2>项目概况</h2>
+                    <div class="fact-item">
+                        <span class="fact-label">授予学位</span>
+                        <span class="fact-value">管理学学士</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">标准学制</span>
+                        <span class="fact-value">四年 (全日制)</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">毕业学分要求</span>
+                        <span class="fact-value">97 学分</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">授课语言</span>
+                        <span class="fact-value">英语</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">开课学院</span>
+                        <span class="fact-value" style="font-size: 1rem; line-height: 1.4;">管理科学与工程学院</span>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="modules-wrapper">
+                
+                <div class="modules-intro">
+                    <h3>课程架构设计</h3>
+                    <p>本专业的课程体系构建于<strong>四大核心模块</strong>之上，融合了多元的核心能力训练与灵活的个性化选修模块。这种结构旨在确保学生在打下扎实商科基础的同时，掌握前沿AI技术并应用于真实商业场景。以下是各模块的精选课程展示。</p>
+                </div>
+
+                <div class="modules-row">
+                    
+                    <div class="module-card">
+                        <div class="card-header">
+                            <div class="card-title">商业基石</div>
+                            <div class="card-desc">建立扎实的经济学理论基础与现代管理学思维框架。</div>
+                        </div>
+                        <div class="tags-container">
+                            <div class="course-tag">微观经济学</div>
+                            <div class="course-tag">宏观经济学</div>
+                            <div class="course-tag">会计学</div>
+                            <div class="course-tag">管理学原理</div>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="card-header">
+                            <div class="card-title">AI与数据科学</div>
+                            <div class="card-desc">掌握从数据分析、编程到机器学习建模的核心计算工具。</div>
+                        </div>
+                        <div class="tags-container">
+                            <div class="course-tag">程序设计及应用 (Python)</div>
+                            <div class="course-tag">机器学习与商业应用</div>
+                            <div class="course-tag">大模型与生成式AI应用</div>
+                            <div class="course-tag">数据库原理与应用</div>
+                        </div>
+                    </div>
+
+                    <div class="module-card flagship">
+                        <div class="flagship-badge">核心特色</div>
+                        <div class="card-header">
+                            <div class="card-title">AI商务</div>
+                            <div class="card-desc">本专业的核心能力模块。通过人工智能与战略的融合，驱动商业创新。</div>
+                        </div>
+                        <div class="tags-container">
+                            <div class="course-tag">智能体商务与管理</div>
+                            <div class="course-tag">人工智能营销</div>
+                            <div class="course-tag">智慧供应链管理</div>
+                            <div class="course-tag">智能体设计与商业创新</div>
+                        </div>
+                    </div>
+
+                    <div class="module-card">
+                        <div class="card-header">
+                            <div class="card-title">中国洞察</div>
+                            <div class="card-desc">深入理解中国数字经济生态、商业实践与文化语境。</div>
+                        </div>
+                        <div class="tags-container">
+                            <div class="course-tag">中国概况</div>
+                            <div class="course-tag">数字经济与中国实践</div>
+                            <div class="course-tag">综合汉语 (I-VI)</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="timeline-section">
+            <h3 class="timeline-header">四年学习规划</h3>
+            <div class="timeline-container">
+                <div class="timeline-step">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">大一</span>
+                    <p class="step-desc">夯实基础：数学、经济、管理与Python程序设计。</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">大二</span>
+                    <p class="step-desc">数智核心：数据结构、算法、数据库与机器学习。</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">大三</span>
+                    <p class="step-desc">融合应用：智能体商务、AI营销与高阶专业选修。</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">大四</span>
+                    <p class="step-desc">实战演练：AI商务竞赛实训 & 顶石项目 / 毕业论文。</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 西南财经大学. 版权所有.</p>
+    </footer>
+
+</body>
+</html>
